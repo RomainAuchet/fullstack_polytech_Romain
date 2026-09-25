@@ -18,19 +18,19 @@ public class Film {
         this.DateSortie=DateSortie;
         this.genre=genre;
 }
-    public int Getid(){
+    public int getId(){
         return this.id;
     }
-    public String Gettitre(){
+    public String getTitre(){
         return this.titre;
     }
-    public String Getrealisateur(){
+    public String getRealisateur(){
         return this.realisateur;
     }
-    public LocalDate GetDateSortie(){
+    public LocalDate getDateSortie(){
         return this.DateSortie;
     }
-    public Genrefilms Getgenre(){
+    public Genrefilms getGenre(){
         return this.genre;
     }
 }
