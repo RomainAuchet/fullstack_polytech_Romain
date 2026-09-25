@@ -8,7 +8,6 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration 
 @ComponentScan ("org.polyech.films")
-@PropertySource( "classpath:application.properties")
 public class AppConfig {
 }
 
