@@ -13,8 +13,9 @@ public class FilmService {
      {
         this.store = store;
     }
-    public void createFilm(String titre, String realisateur, LocalDate DateSortie, Genrefilms genre){
-        store.Create(titre, realisateur, DateSortie, genre);
+    public Film createFilm(String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
+        Film film = store.Create(titre, realisateur, dateSortie, genre);
+        return film;
     }
     public Film getFilmbyID(int id){
         return store.getFilmbyID(id);

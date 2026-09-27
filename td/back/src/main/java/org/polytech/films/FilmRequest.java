@@ -2,23 +2,19 @@ package org.polytech.films;
 
 import java.time.LocalDate;
 
-public class Film {
-    private final int id;
+public class FilmRequest {
+
     private final String titre;
     private final String realisateur;
     private final LocalDate dateSortie;
     private final Genrefilms genre;
 
-    public Film(int id, String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
-        this.id=id;
+    public FilmRequest(String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
         this.titre=titre;
         this.realisateur=realisateur;
         this.dateSortie=dateSortie;
         this.genre=genre;
 }
-    public int getId(){
-        return this.id;
-    }
     public String getTitre(){
         return this.titre;
     }
@@ -32,4 +28,7 @@ public class Film {
         return this.genre;
     }
 }
+
+
+
 

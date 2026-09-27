@@ -19,6 +19,7 @@ public class FilmsRepo implements FilmStore{
     @Override 
     public void saveFilm(Film film){
         films.add(film);
+        
     }
     @Override 
     public Film getFilmbyID(int id){
@@ -29,9 +30,10 @@ public class FilmsRepo implements FilmStore{
         return films;
     }
     @Override 
-    public void Create(String titre, String realisateur, LocalDate DateSortie, Genrefilms genre){
+    public Film Create(String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
         int id= (films.size())+1;
-        Film newfilm = new Film(id,titre, realisateur, DateSortie, genre);
+        Film newfilm = new Film(id,titre, realisateur, dateSortie, genre);
         saveFilm(newfilm);
+        return newfilm;
 }
 }

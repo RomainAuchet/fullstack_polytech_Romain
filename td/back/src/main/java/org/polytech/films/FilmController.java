@@ -1,4 +1,5 @@
 package org.polytech.films;
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController 
 public class FilmController {
@@ -26,9 +28,12 @@ public class FilmController {
     }
 
     @PostMapping ("/films")
-    public ResponseEntity<String> createfilm(@RequestBody Film film){
-        services.createfilm(film.getTitre(),film.getRealisateur(),film.getDateSortie(), film.getDateSortie());
-        return 
-    }
+    public ResponseEntity<Film> createfilm(@RequestBody FilmRequest film) {
+    Film saved = service.createFilm(film.getTitre(),film.getRealisateur(),film.getdateSortie(), film.getGenre());
+    URI uri = ServletUriComponentsBuilder
+    .fromCurrentRequest().path( "/{id}")
+    .buildAndExpand(saved.getId()).toUri();
+    return ResponseEntity.created(uri).body(saved);
     }
 
+}
