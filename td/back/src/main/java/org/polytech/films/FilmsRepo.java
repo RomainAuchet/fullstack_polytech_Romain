@@ -42,4 +42,8 @@ public class FilmsRepo implements FilmStore{
         films.set(id-1,newfilm);
         return newfilm;
     }
+    @Override 
+    public void Delete(int id){
+        films.set(id-1,null); //pour ne pas casser la logique d'id on change simplement en null
+    }
 }

@@ -21,6 +21,9 @@ public class FilmService {
         return film;
     }
     public Film getFilmbyID(int id){
+        if (id > getALLFilm().size()) {
+            throw new FilmNotFoundException("Film not found");
+        }
         return store.getFilmbyID(id);
     }
     public List<Film> getALLFilm(){
@@ -29,6 +32,9 @@ public class FilmService {
     public Film Updatefilm(int id,FilmRequest film){;
         Film updatedfilm =store.Update(id, film);
         return updatedfilm;
+    }
+    public void Deletefilm(int id){
+        store.Delete(id);
     }
     
 }
