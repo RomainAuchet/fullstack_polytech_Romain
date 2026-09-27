@@ -35,5 +35,11 @@ public class FilmsRepo implements FilmStore{
         Film newfilm = new Film(id,titre, realisateur, dateSortie, genre);
         saveFilm(newfilm);
         return newfilm;
-}
+    }
+    @Override 
+    public Film Update(int id, FilmRequest film){   
+        Film newfilm= new Film(id,film.getTitre(),film.getRealisateur(),film.getDateSortie(),film.getGenre());
+        films.set(id-1,newfilm);
+        return newfilm;
+    }
 }

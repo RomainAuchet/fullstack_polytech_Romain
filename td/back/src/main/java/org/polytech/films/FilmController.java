@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -29,11 +30,17 @@ public class FilmController {
 
     @PostMapping ("/films")
     public ResponseEntity<Film> createfilm(@RequestBody FilmRequest film) {
-    Film saved = service.createFilm(film.getTitre(),film.getRealisateur(),film.getdateSortie(), film.getGenre());
+    Film saved = service.createFilm(film.getTitre(),film.getRealisateur(),film.getDateSortie(), film.getGenre());
     URI uri = ServletUriComponentsBuilder
     .fromCurrentRequest().path( "/{id}")
     .buildAndExpand(saved.getId()).toUri();
     return ResponseEntity.created(uri).body(saved);
     }
+    @PutMapping ("/films/{id:\\d+}")
+    public ResponseEntity<Film> updateFilm(@PathVariable int id,@RequestBody FilmRequest film){
+        Film updated = service.Updatefilm(id, film);
+        return ResponseEntity.ok(updated);
+    }
+
 
 }

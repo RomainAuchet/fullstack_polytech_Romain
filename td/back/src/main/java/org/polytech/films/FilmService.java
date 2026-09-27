@@ -26,5 +26,9 @@ public class FilmService {
     public List<Film> getALLFilm(){
         return store.getallFilms();
     }
+    public Film Updatefilm(int id,FilmRequest film){;
+        Film updatedfilm =store.Update(id, film);
+        return updatedfilm;
+    }
     
 }

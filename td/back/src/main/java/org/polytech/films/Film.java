@@ -25,7 +25,7 @@ public class Film {
     public String getRealisateur(){
         return this.realisateur;
     }
-    public LocalDate getdateSortie(){
+    public LocalDate getDateSortie(){
         return this.dateSortie;
     }
     public Genrefilms getGenre(){

@@ -8,4 +8,5 @@ public interface FilmStore {
     public Film getFilmbyID(int id);
     public List<Film> getallFilms();
     public Film Create(String titre, String realisateur, LocalDate dateSortie, Genrefilms genre);
+    public Film Update(int id, FilmRequest film);
 }
