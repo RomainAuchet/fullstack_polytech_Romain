@@ -14,6 +14,9 @@ public class FilmService {
         this.store = store;
     }
     public Film createFilm(String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
+        if (titre == null) {
+            throw new IllegalArgumentException("titre obligatoire");
+        }
         Film film = store.Create(titre, realisateur, dateSortie, genre);
         return film;
     }
