@@ -2,21 +2,31 @@ package org.polytech.films;
 
 import java.time.LocalDate;
 
-public class Film {
-    private final int id;
-    private final String titre;
-    private final String realisateur;
-    private final LocalDate dateSortie;
-    private final Genrefilms genre;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-    public Film(int id, String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
+@Entity 
+public class Film {
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(nullable=false, length=200)
+    private  String titre;
+    private  String realisateur;
+    private  LocalDate dateSortie;
+    private Genrefilms genre;
+
+    public Film(long id, String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
         this.id=id;
         this.titre=titre;
         this.realisateur=realisateur;
         this.dateSortie=dateSortie;
         this.genre=genre;
 }
-    public int getId(){
+    public long getId(){
         return this.id;
     }
     public String getTitre(){

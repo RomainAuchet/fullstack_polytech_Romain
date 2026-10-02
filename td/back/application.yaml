@@ -1,0 +1,15 @@
+# application.yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/filmdb
+    username: backuser2
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    open-in-view: false
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always

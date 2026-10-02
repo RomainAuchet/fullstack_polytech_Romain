@@ -1,0 +1,17 @@
+###liste des acteurs
+GET http://localhost:8080/films/acteurs 
+
+###détail
+GET http://localhost:8080/films/acteurs/{id} 
+
+###création
+POST http://localhost:8080/films/acteurs 
+
+###mise à jour
+PUT http://localhost:8080/films/acteurs/{id} 
+
+###suppression
+DELETE http://localhost:8080/films/acteurs/{id} 
+
+
+GET http://localhost:8080/films/acteurs/{id}/films
