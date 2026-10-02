@@ -1,13 +1,12 @@
-package org.polytech.films;
+package org.polytech.config;
 
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 
 @Configuration 
-@ComponentScan ("org.polyech.films")
+@ComponentScan ("org.polytech")
 public class AppConfig {
 }
 

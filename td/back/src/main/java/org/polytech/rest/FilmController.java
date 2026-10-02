@@ -1,7 +1,10 @@
-package org.polytech.films;
+package org.polytech.rest;
 import java.net.URI;
 import java.util.List;
 
+import org.polytech.dto.FilmCreationDto;
+import org.polytech.dto.FilmDto;
+import org.polytech.films.FilmService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,32 +23,33 @@ public class FilmController {
         this.service=service;
     }
     @GetMapping ("/films")
-    public List<Film> getALLFilm(){
-        return service.getALLFilm();
+    public List<FilmDto> getAllFilms(){
+        return service.getAllFilms();
     }
 
     @GetMapping ("/films/{id:\\d+}")
-    public Film getFilmbyID(@PathVariable int id){
-        return service.getFilmbyID(id);
+    public FilmDto getFilmbyID(@PathVariable Long id){
+        return service.getFilmById(id);
     }
 
     @PostMapping ("/films")
-    public ResponseEntity<Film> createfilm(@RequestBody FilmRequest film) {
-    Film saved = service.createFilm(film.getTitre(),film.getRealisateur(),film.getDateSortie(), film.getGenre());
+    public ResponseEntity<FilmDto> createfilm(@RequestBody FilmCreationDto filmdto) {
+    FilmDto saved = service.createFilm(filmdto);
     URI uri = ServletUriComponentsBuilder
     .fromCurrentRequest().path( "/{id}")
-    .buildAndExpand(saved.getId()).toUri();
+    .buildAndExpand(saved.id()).toUri();
     return ResponseEntity.created(uri).body(saved);
     }
 
     @PutMapping ("/films/{id:\\d+}")
-    public ResponseEntity<Film> updateFilm(@PathVariable int id,@RequestBody FilmRequest film){
-        Film updated = service.Updatefilm(id, film);
+    public ResponseEntity<FilmDto> updateFilm(@PathVariable Long id,@RequestBody FilmCreationDto film){
+        FilmDto updated = service.updateFilm(id, film);
         return ResponseEntity.ok(updated);
     }
+
     @DeleteMapping ("/films/{id:\\d+}")
-    public ResponseEntity<Void> DeleteFilm(@PathVariable int id){
-        service.Deletefilm(id);
+    public ResponseEntity<Void> DeleteFilm(@PathVariable Long id){
+        service.DeleteFilm(id);
         return ResponseEntity.noContent().build();
     }
 

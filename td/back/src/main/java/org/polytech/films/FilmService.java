@@ -1,40 +1,71 @@
 package org.polytech.films;
 
-import java.time.LocalDate;
 import java.util.List;
 
+import org.polytech.dto.FilmCreationDto;
+import org.polytech.dto.FilmDto;
+import org.polytech.dto.FilmMapper;
+import org.polytech.repository.ActeurRepository;
+import org.polytech.repository.FilmRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service 
 public class FilmService {
-    private final FilmStore store;
+    private final FilmRepository repository;
+    private final ActeurRepository acteurRepository;
 
-    public FilmService(FilmStore store)
-     {
-        this.store = store;
+    public FilmService(FilmRepository repository, ActeurRepository acteurRepository) {
+        this.repository = repository;
+        this.acteurRepository = acteurRepository;
     }
-    public Film createFilm(String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
-        if (titre == null) {
+    @Transactional
+    public FilmDto createFilm(FilmCreationDto body){
+        if (body.titre() == null) {
             throw new IllegalArgumentException("titre obligatoire");
         }
-        Film film = store.Create(titre, realisateur, dateSortie, genre);
-        return film;
+        Film saved = repository.save(FilmMapper.toEntity(body));
+        return FilmMapper.toDto(saved);
     }
-    public Film getFilmbyID(int id){
-        if (id > getALLFilm().size()) {
-            throw new FilmNotFoundException("Film not found");
+
+    @Transactional(readOnly = true)
+    public FilmDto getFilmById(Long id) {
+        return repository.findById(id)
+                .map(FilmMapper::toDto)
+                .orElseThrow(() -> new FilmNotFoundException("Film non trouvé"));
+    }
+
+    @Transactional(readOnly = true)
+    public List<FilmDto> getAllFilms() {
+        return repository.findAll().stream()
+                .map(FilmMapper::toDto)
+                .toList();
+    }
+    @Transactional
+    public FilmDto updateFilm(Long id, FilmCreationDto body) {
+        Film film = repository.findById(id)
+                .orElseThrow(() -> new FilmNotFoundException("Film non trouvé"));
+        film.setTitre(body.titre());
+        film.setRealisateur(body.realisateur());
+        film.setDateSortie(body.dateSortie());
+        film.setGenre(body.genre());
+        repository.save(film);
+        return FilmMapper.toDto(film);
+    }
+
+    @Transactional
+    public void DeleteFilm(Long id) {
+        if (!repository.existsById(id)) {
+            throw new FilmNotFoundException("Film non trouvé");
         }
-        return store.getFilmbyID(id);
+        repository.deleteById(id);
     }
-    public List<Film> getALLFilm(){
-        return store.getallFilms();
-    }
-    public Film Updatefilm(int id,FilmRequest film){;
-        Film updatedfilm =store.Update(id, film);
-        return updatedfilm;
-    }
-    public void Deletefilm(int id){
-        store.Delete(id);
+    @Transactional(readOnly = true)
+    public List<FilmDto> getFilmByTitre(String titre) {
+        return repository.findByTitre(titre).stream()
+                .map(FilmMapper::toDto)
+                .toList();
     }
     
 }

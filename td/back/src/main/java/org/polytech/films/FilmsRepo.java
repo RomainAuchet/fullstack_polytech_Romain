@@ -4,11 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import jakarta.annotation.PostConstruct;
 
-@Repository 
+@Deprecated
 public class FilmsRepo implements FilmStore{
     private final List<Film> films= new ArrayList<>();
 
@@ -31,14 +29,14 @@ public class FilmsRepo implements FilmStore{
     }
     @Override 
     public Film Create(String titre, String realisateur, LocalDate dateSortie, Genrefilms genre){
-        int id= (films.size())+1;
+        Long id= (long) (films.size())+1;
         Film newfilm = new Film(id,titre, realisateur, dateSortie, genre);
         saveFilm(newfilm);
         return newfilm;
     }
     @Override 
     public Film Update(int id, FilmRequest film){   
-        Film newfilm= new Film(id,film.getTitre(),film.getRealisateur(),film.getDateSortie(),film.getGenre());
+        Film newfilm= new Film((long)id,film.getTitre(),film.getRealisateur(),film.getDateSortie(),film.getGenre());
         films.set(id-1,newfilm);
         return newfilm;
     }

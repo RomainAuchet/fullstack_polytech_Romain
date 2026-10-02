@@ -1,8 +1,9 @@
-package org.polytech.films;
+package org.polytech.rest;
 
 import java.net.URI;
 import java.time.Instant;
 
+import org.polytech.films.FilmNotFoundException;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import org.springframework.http.ProblemDetail;

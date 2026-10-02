@@ -1,9 +1,11 @@
-package org.polytech.films;
+package org.polytech.dto;
 
 import java.time.LocalDate;
 
+import org.polytech.films.Genrefilms;
+
 public record FilmDto(
-    int id,
+    Long id,
     String titre,
     String realisateur,
     LocalDate dateSortie,
