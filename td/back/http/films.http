@@ -42,3 +42,19 @@ DELETE http://localhost:8080/films/1
 ### Identifiant inconnu — réponse attendue : 404 au format ProblemDetail
 GET http://localhost:8080/films/9999
 Accept: application/json
+
+### Acteurs d'un film
+GET http://localhost:8080/films/1/acteurs
+Accept: application/json
+
+### Ajout d'un acteur à un film
+POST http://localhost:8080/films/1/acteurs/1
+Content-Type: application/json
+
+{
+  "nom": "Reaper",
+  "prenom": "John",
+}
+
+### Suppression d'un acteur d'un film
+DELETE http://localhost:8080/films/1/acteurs/1
