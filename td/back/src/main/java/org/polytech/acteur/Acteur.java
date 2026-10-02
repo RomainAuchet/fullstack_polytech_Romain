@@ -3,7 +3,7 @@ package org.polytech.acteur;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.polytech.dto.FilmDto;
+import org.polytech.films.Film;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +21,9 @@ public class Acteur {
     private  String nom;
     private  String prenom;
     @ManyToMany(mappedBy = "acteurs")
-    private Set<FilmDto> films = new HashSet<>();          
+    private Set<Film> films = new HashSet<>();          
+
+    public Acteur(){}
 
     public Acteur(String nom, String prenom){
         this.nom=nom;
@@ -45,10 +47,10 @@ public class Acteur {
     public void setPrenom(String prenom){
         this.prenom=prenom;
     }
-    public void setActeurs(Set<FilmDto> films) {
+    public void setActeurs(Set<Film> films) {
         this.films = films;
     }
-    public Set<FilmDto> getFilms(){
+    public Set<Film> getFilms(){
         return this.films;
     }
 }

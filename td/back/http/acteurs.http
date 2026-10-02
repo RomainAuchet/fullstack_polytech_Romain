@@ -4,27 +4,28 @@ Accept: application/json
 
 ### Voir un acteur avec son Id
 GET http://localhost:8080/acteurs/1
-Accept: appliation/json
+Accept: application/json
 
 ### Creation d'un acteur 
 POST http://localhost:8080/acteurs
-Accept: appliation/json
+Content-Type: application/json
+
 {
   "nom": "Reaper",
-  "prenom": "John",
+  "prenom": "John"
 }
 
 ### Update d'un acteur 
 PUT http://localhost:8080/acteurs/1
-Accept: appliation/json
+Content-Type: application/json
+
 {
   "nom": "Angel",
-  "prenom": "Bob",
+  "prenom": "Bob"
 }
 
 ### Suppression d'un acteur 
 DELETE http://localhost:8080/acteurs/1 
-Accept: appliation/json
 
 ### Liste des films d'un acteur 
 GET http://localhost:8080/acteurs/1/films 
