@@ -3,6 +3,7 @@ package org.polytech.acteur;
 import java.util.List;
 
 import org.polytech.dto.ActeurCreationDto;
+import org.polytech.dto.ActeurDetailDto;
 import org.polytech.dto.ActeurDto;
 import org.polytech.dto.ActeurMapper;
 import org.polytech.films.FilmNotFoundException;
@@ -30,9 +31,9 @@ public class ActeurService {
     }
 
     @Transactional(readOnly = true)
-    public ActeurDto getActeurById(Long id) {
+    public ActeurDetailDto getActeurById(Long id) {
         return repository.findById(id)
-                .map(ActeurMapper::toDto)
+                .map(ActeurMapper::toDetailDto)
                 .orElseThrow(() -> new FilmNotFoundException("Acteur non trouvé"));
     }
 
@@ -59,10 +60,12 @@ public class ActeurService {
         }
         repository.deleteById(id);
     }
+
     @Transactional(readOnly = true)
-    public List<ActeurDto> getActeurByNom(String nom) {
-        return repository.findByNom(nom).stream()
-                .map(ActeurMapper::toDto)
-                .toList();
+    public ActeurDetailDto getActeurByIdwithDetail(Long id) {
+        return repository.findById(id)
+                .map(ActeurMapper::toDetailDto)
+                .orElseThrow(() -> new ActeurNotFoundException("Acteur non trouvé"));
     }
 }
+

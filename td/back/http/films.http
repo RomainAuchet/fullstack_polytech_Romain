@@ -51,10 +51,6 @@ Accept: application/json
 POST http://localhost:8080/films/1/acteurs/1
 Content-Type: application/json
 
-{
-  "nom": "Reaper",
-  "prenom": "John",
-}
-
 ### Suppression d'un acteur d'un film
 DELETE http://localhost:8080/films/1/acteurs/1
+Accept: application/json

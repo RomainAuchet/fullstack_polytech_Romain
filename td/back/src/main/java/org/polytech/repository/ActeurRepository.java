@@ -8,7 +8,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ActeurRepository extends JpaRepository<Acteur, Long>{
-
-    List<Acteur> findByNom(String nom);
-
 }

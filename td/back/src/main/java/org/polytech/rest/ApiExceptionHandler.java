@@ -3,6 +3,7 @@ package org.polytech.rest;
 import java.net.URI;
 import java.time.Instant;
 
+import org.polytech.acteur.ActeurNotFoundException;
 import org.polytech.films.FilmNotFoundException;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -16,7 +17,7 @@ public class ApiExceptionHandler {
 @ExceptionHandler(IllegalArgumentException.class)
 public ProblemDetail handle(IllegalArgumentException e) {
     ProblemDetail pb = ProblemDetail.forStatusAndDetail(BAD_REQUEST, e.getMessage());
-    pb.setTitle("Film invalide");
+    pb.setTitle("Requête invalide");
     pb.setType(URI.create(
     "https://api.polytech.fr/errors/films" ));
     pb.setProperty("timestamp", Instant.now());
@@ -28,6 +29,14 @@ public ProblemDetail handle (FilmNotFoundException e) {
     pb.setTitle("Id invalide");
     pb.setType(URI.create(
     "https://api.polytech.fr/errors/films" ));
+    pb.setProperty("timestamp", Instant.now());
+    return pb;
+}
+public ProblemDetail handle (ActeurNotFoundException e) {
+    ProblemDetail pb = ProblemDetail.forStatusAndDetail(NOT_FOUND, e.getMessage());
+    pb.setTitle("Id invalide");
+    pb.setType(URI.create(
+    "https://api.polytech.fr/errors/acteurs" ));
     pb.setProperty("timestamp", Instant.now());
     return pb;
 }

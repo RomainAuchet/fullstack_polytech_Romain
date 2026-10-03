@@ -2,7 +2,9 @@ package org.polytech.rest;
 import java.net.URI;
 import java.util.List;
 
+import org.polytech.dto.ActeurDto;
 import org.polytech.dto.FilmCreationDto;
+import org.polytech.dto.FilmDetailDto;
 import org.polytech.dto.FilmDto;
 import org.polytech.films.FilmService;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,7 @@ public class FilmController {
     }
 
     @GetMapping ("/films/{id:\\d+}")
-    public FilmDto getFilmbyID(@PathVariable Long id){
+    public FilmDetailDto getFilmbyID(@PathVariable Long id){
         return service.getFilmById(id);
     }
 
@@ -52,5 +54,18 @@ public class FilmController {
         service.DeleteFilm(id);
         return ResponseEntity.noContent().build();
     }
-
+    @GetMapping ("/films/{id:\\d+}/acteurs")
+    public List<ActeurDto> getActeurfromFilmbyID(@PathVariable Long id){
+        return service.getActeurfromFilmbyID(id);
+    }
+    @PostMapping ("/films/{id:\\d+}/acteurs/{acteurId:\\d+}")
+    public ResponseEntity<FilmDetailDto> addActeur(@PathVariable Long id, @PathVariable Long acteurId){
+        FilmDetailDto filmWithNewActeur = service.addActeur(id, acteurId);
+        return ResponseEntity.ok(filmWithNewActeur);
+    }
+    @DeleteMapping ("/films/{id:\\d+}/acteurs/{acteurId:\\d+}")
+    public ResponseEntity<Void> DeleteActeur(@PathVariable Long id,@PathVariable Long acteurId){
+        service.removeActeur(id, acteurId);
+        return ResponseEntity.noContent().build();
+    }
 }

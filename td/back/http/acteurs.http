@@ -29,4 +29,4 @@ DELETE http://localhost:8080/acteurs/1
 
 ### Liste des films d'un acteur 
 GET http://localhost:8080/acteurs/1/films 
-Accept: appliation/json
+Accept: application/json

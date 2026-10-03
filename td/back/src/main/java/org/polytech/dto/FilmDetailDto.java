@@ -3,7 +3,6 @@ package org.polytech.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.polytech.acteur.Acteur;
 import org.polytech.films.Genrefilms;
 
 public record FilmDetailDto(Long id,
@@ -11,6 +10,6 @@ public record FilmDetailDto(Long id,
     String realisateur,
     LocalDate dateSortie,
     Genrefilms genre,
-    List<Acteur> acteurs) {
+    List<ActeurDto> acteurs) {
 
 }

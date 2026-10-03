@@ -47,7 +47,7 @@ public class Acteur {
     public void setPrenom(String prenom){
         this.prenom=prenom;
     }
-    public void setActeurs(Set<Film> films) {
+    public void setFilms(Set<Film> films) {
         this.films = films;
     }
     public Set<Film> getFilms(){

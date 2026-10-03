@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.polytech.acteur.ActeurService;
 import org.polytech.dto.ActeurCreationDto;
+import org.polytech.dto.ActeurDetailDto;
 import org.polytech.dto.ActeurDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,7 @@ public class ActeurController {
     }
 
     @GetMapping ("/acteurs/{id:\\d+}")
-    public ActeurDto getActeurbyID(@PathVariable Long id){
+    public ActeurDetailDto getActeurbyID(@PathVariable Long id){
         return service.getActeurById(id);
     }
 
@@ -52,13 +53,11 @@ public class ActeurController {
         service.DeleteActeur(id);
         return ResponseEntity.noContent().build();
     }
-   """
            
     @GetMapping ("/acteurs/{id:\\d+}/films")
-   public ActeurDto getActeurbyIDwithDetail(@PathVariable Long id){
+   public ActeurDetailDto getActeurbyIdwithDetail(@PathVariable Long id){
       return service.getActeurByIdwithDetail(id);
     }
-"""
         
         
 }

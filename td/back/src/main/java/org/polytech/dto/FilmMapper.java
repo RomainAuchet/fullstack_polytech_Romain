@@ -1,5 +1,7 @@
 package org.polytech.dto;
 
+import java.util.List;
+
 import org.polytech.films.Film;
 
 public final class FilmMapper {
@@ -23,5 +25,18 @@ public final class FilmMapper {
         film.setDateSortie(dto.dateSortie());
         film.setGenre(dto.genre());
         return film;
+    }
+
+    public static FilmDetailDto toDetailDto(Film film) {
+      List<ActeurDto> acteurs = film.getActeurs().stream()
+            .map(ActeurMapper::toDto)
+            .toList();
+        return new FilmDetailDto(
+                film.getId(),
+                film.getTitre(),
+                film.getRealisateur(),
+                film.getDateSortie(),
+                film.getGenre(),
+                acteurs);
     }
 }
