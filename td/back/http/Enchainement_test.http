@@ -1,0 +1,133 @@
+
+### Creation premier acteur
+POST http://localhost:8080/acteurs
+Content-Type: application/json
+
+{
+  "nom": "Reaper",
+  "prenom": "John"
+}
+
+### Creation du second acteur 
+POST http://localhost:8080/acteurs
+Content-Type: application/json
+
+{
+  "nom": "Angel",
+  "prenom": "Bob"
+}
+
+### Creation du premier film
+POST http://localhost:8080/films
+Content-Type: application/json
+
+{
+  "titre": "Blade Runner",
+  "realisateur": "Ridley Scott",
+  "dateSortie": "1982-06-25",
+  "genre": "SCIENCE_FICTION"
+}
+
+### Creation du second film
+POST http://localhost:8080/films
+Content-Type: application/json
+
+{
+  "titre": "Jambon",
+  "realisateur": "Beurre",
+  "dateSortie": "1992-05-25",
+  "genre": "FANTASTIQUE"
+}
+
+### Ajout de l'acteur 1 au film 1
+POST http://localhost:8080/films/1/acteurs/1
+Content-Type: application/json
+
+### Ajout de l'acteur 2 au film 1
+POST http://localhost:8080/films/1/acteurs/2
+Content-Type: application/json
+
+### Ajout de l'acteur 1 au film 2
+POST http://localhost:8080/films/2/acteurs/1
+Content-Type: application/json
+
+### Liste de tous les acteurs (sans les films)
+GET http://localhost:8080/acteurs
+Accept: application/json
+
+### Detail de l'acteur 1 (avec la liste des films)
+GET http://localhost:8080/acteurs/1
+Accept: application/json
+
+### Liste des films de l'acteur 1
+GET http://localhost:8080/acteurs/1/films
+Accept: application/json
+
+### Liste de tous les films (sans les acteurs)
+GET http://localhost:8080/films
+Accept: application/json
+
+### Detail du film 1 (avec la liste des acteurs)
+GET http://localhost:8080/films/1
+Accept: application/json
+
+### Liste des acteurs du film 1
+GET http://localhost:8080/films/1/acteurs
+Accept: application/json
+
+### Mettre à jour l'acteur 1
+PUT http://localhost:8080/acteurs/1
+Content-Type: application/json
+
+{
+  "nom": "Patrick",
+  "prenom": "Star"
+}
+
+### Mettre à jour le film 1
+PUT http://localhost:8080/films/1
+Content-Type: application/json
+
+{
+  "titre": "Blade Runner 4",
+  "realisateur": "Jean dujardin",
+  "dateSortie": "2019-10-04",
+  "genre": "SCIENCE_FICTION"
+}
+
+### Retirer l'acteur 2 du film 1
+DELETE http://localhost:8080/films/1/acteurs/2
+
+### Verification
+GET http://localhost:8080/films/1/acteurs
+Accept: application/json
+
+### Supprime le film 2 
+DELETE http://localhost:8080/films/2
+
+### Supprime l'acteur 2 
+DELETE http://localhost:8080/acteurs/2
+
+### Creation d'un film invalide 
+POST http://localhost:8080/films
+Content-Type: application/json
+
+{
+  "realisateur": "Sans Titre"
+}
+
+### Creation d'un acteur invalide 
+POST http://localhost:8080/acteurs
+Content-Type: application/json
+
+{
+  "prenom": "Sans Nom"
+}
+
+### Recherche d'un film inexistant
+GET http://localhost:8080/films/9999
+Accept: application/json
+
+### Recherche d'un acteur inexistant 
+GET http://localhost:8080/acteurs/9999
+Accept: application/json
