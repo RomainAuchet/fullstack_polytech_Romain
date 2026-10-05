@@ -32,6 +32,7 @@ public ProblemDetail handle (FilmNotFoundException e) {
     pb.setProperty("timestamp", Instant.now());
     return pb;
 }
+@ExceptionHandler(ActeurNotFoundException.class)
 public ProblemDetail handle (ActeurNotFoundException e) {
     ProblemDetail pb = ProblemDetail.forStatusAndDetail(NOT_FOUND, e.getMessage());
     pb.setTitle("Id invalide");

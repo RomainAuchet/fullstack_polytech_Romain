@@ -6,7 +6,7 @@ import org.polytech.dto.ActeurCreationDto;
 import org.polytech.dto.ActeurDetailDto;
 import org.polytech.dto.ActeurDto;
 import org.polytech.dto.ActeurMapper;
-import org.polytech.films.FilmNotFoundException;
+import org.polytech.dto.FilmDto;
 import org.polytech.repository.ActeurRepository;
 import org.polytech.repository.FilmRepository;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service 
 public class ActeurService {
     private final ActeurRepository repository;
-    private final FilmRepository filmrepository;
 
     public ActeurService(ActeurRepository repository, FilmRepository FilmRepository) {
         this.repository = repository;
-        this.filmrepository = FilmRepository;
     }
     @Transactional
     public ActeurDto createActeur(ActeurCreationDto body){
@@ -34,7 +32,7 @@ public class ActeurService {
     public ActeurDetailDto getActeurById(Long id) {
         return repository.findById(id)
                 .map(ActeurMapper::toDetailDto)
-                .orElseThrow(() -> new FilmNotFoundException("Acteur non trouvé"));
+                .orElseThrow(() -> new ActeurNotFoundException("Acteur non trouvé"));
     }
 
     @Transactional(readOnly = true)
@@ -60,12 +58,15 @@ public class ActeurService {
         }
         repository.deleteById(id);
     }
-
+    
     @Transactional(readOnly = true)
-    public ActeurDetailDto getActeurByIdwithDetail(Long id) {
-        return repository.findById(id)
+    public List<FilmDto> getFilmFromActeurById(Long id) {
+        ActeurDetailDto acteur =repository.findById(id)
                 .map(ActeurMapper::toDetailDto)
                 .orElseThrow(() -> new ActeurNotFoundException("Acteur non trouvé"));
+        List<FilmDto> films = acteur.films();
+        return films;
     }
+
 }
 

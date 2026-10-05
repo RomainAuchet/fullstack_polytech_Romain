@@ -6,6 +6,7 @@ import org.polytech.acteur.ActeurService;
 import org.polytech.dto.ActeurCreationDto;
 import org.polytech.dto.ActeurDetailDto;
 import org.polytech.dto.ActeurDto;
+import org.polytech.dto.FilmDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,8 +56,8 @@ public class ActeurController {
     }
            
     @GetMapping ("/acteurs/{id:\\d+}/films")
-   public ActeurDetailDto getActeurbyIdwithDetail(@PathVariable Long id){
-      return service.getActeurByIdwithDetail(id);
+   public List<FilmDto> getActeurbyIdwithDetail(@PathVariable Long id){
+      return service.getFilmFromActeurById(id);
     }
         
         
