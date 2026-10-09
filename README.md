@@ -2,7 +2,7 @@
 
 Bienvenue dans mon projet Fullstack !
 
-Il consiste en une bibliothèque de film où l'on peut ajouter/supprimer/modifier des films ainsi qu'associer ou dissocier des acteurs de ses film. 
+Il consiste en une bibliothèque de films où l'on peut ajouter/supprimer/modifier des films ainsi qu'associer ou dissocier des acteurs de leurs films. 
 
 ## Structure
 
@@ -21,9 +21,12 @@ Il est necessaire d'avoir :
 • JDK 26  
 • Gradle 9
 • PostgreSQL avec cette config :
+    ```yaml
     url: jdbc:postgresql://localhost:5432/filmdb
     username: backuser2
     password: password
+    ```
+
 • REST Client
 
 ## Démarrage
@@ -33,17 +36,21 @@ Pour lancer le projet :
 Etape 1 : Démarrer le backend (port 8080)
 Depuis la racine du projet : 
 
+  ```bash
   cd td/back
   ./gradlew bootRun
+```
 
 Etape 2. Démarrer le front (port 4200) 
 Depuis la racine du projet : 
 
+ ```bash
   cd td/front/films-app
   ng serve
+```
 
 Vous pouvez ensuite ouvrir le site sur un navigateur via : http://localhost:4200/films
-Les appels api sont envoyés au back via proxy.conf.json
+Les appels api sont envoyés au back via `proxy.conf.json`.
 
 ## Fonctionnalités et Endpoints :
 
