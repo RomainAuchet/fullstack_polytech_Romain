@@ -21,11 +21,10 @@ Il est necessaire d'avoir :
 • JDK 26  
 • Gradle 9
 • PostgreSQL avec cette config :
-    ```yaml
+
     url: jdbc:postgresql://localhost:5432/filmdb
     username: backuser2
     password: password
-    ```
 
 • REST Client
 
