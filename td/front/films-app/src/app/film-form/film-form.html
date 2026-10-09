@@ -3,18 +3,30 @@
 }
 
 <form #f="ngForm" (ngSubmit)="enregistrer()">
+  <br>
   <label for="titre">titre : </label>
   <input name="titre" [(ngModel)]="film.titre" required minlength="2" #titre="ngModel" />
-  
+  <br>
   @if (titre.invalid && titre.touched) {
     <small>Titre requis</small>
   }
   <label for="realisateur">realisateur : </label>
   <input name="realisateur" [(ngModel)]="film.realisateur" required />
+  <br>
   <label for="dateSortie">date de sortie : </label>
   <input name="dateSortie" type="date" [(ngModel)]="film.dateSortie" required />
+  <br>
   <label for="genre">genre : </label>
-  <input name="genre" [(ngModel)]="film.genre" required />
-
+  <select name="genre" [(ngModel)]="film.genre" required >
+    <option value="" disabled selected> Choissisez un genre </option>
+    <option value="ACTION">ACTION</option>
+    <option value="AVENTURE">AVENTURE</option>
+    <option value="SCIENCE_FICTION">SCIENCE_FICTION</option>
+    <option value="ENQUETE">ENQUETE</option>
+    <option value="ROMANCE">ROMANCE</option>
+    <option value="FANTASTIQUE">FANTASTIQUE</option>
+    <option value="THRILLER">THRILLER</option>
+  </select>
+  <br>
   <button type="submit" [disabled]="f.invalid">Enregistrer</button>
 </form>
