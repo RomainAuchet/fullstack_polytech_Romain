@@ -1,7 +1,7 @@
 @if (erreur()) {
   <p>{{ erreur() }}</p>
 }
-
+<h2>Liste des Films</h2>
 <ul>
   @for (f of films(); track f.id) {
     <app-film-card [film]="f" (supprimer)="onSupprimer($event)" />

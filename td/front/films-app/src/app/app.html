@@ -1,6 +1,13 @@
 <nav>
+  <p >Bienvenue sur la bibliothèque de Film de Romain !</p>
   <a routerLink="/films" routerLinkActive="actif">Films</a>
-  <a routerLink="/acteurs" routerLinkActive="actif">Acteurs</a>
+  <br>
+  <a routerLink="/acteurs" routerLinkActive="actif"> Acteurs</a>
+  <br>
+  <a [routerLink]="['/films/', 'nouveau']">Ajouter un film</a>
+  <br>
+  <a [routerLink]="['/acteurs/', 'nouveau']">Ajouter un acteur</a>
+
 </nav>
 
 <router-outlet />
