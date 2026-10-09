@@ -1,1 +1,11 @@
-<p>film-list works!</p>
+@if (erreur()) {
+  <p>{{ erreur() }}</p>
+}
+
+<ul>
+  @for (f of films(); track f.id) {
+    <app-film-card [film]="f" (supprimer)="onSupprimer($event)" />
+  } @empty {
+    <li>Aucun film enregistré.</li>
+  }
+</ul>
