@@ -37,7 +37,7 @@ export class FilmDetail {
   recharger() {
     this.filmService.getById(Number(this.id())).subscribe({
       next: (f) => this.film.set(f),
-      error: (e) => this.erreur.set("Erreur de chargement")
+      error: (e) => this.erreur.set(e)
     });
   }
 

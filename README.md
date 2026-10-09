@@ -1,73 +1,82 @@
 # Développement Fullstack — Polytech
 
-Dépôt de travail du cours. Il regroupe les TP du cours magistral et les TD à rendre.
+Bienvenue dans mon projet Fullstack !
+
+Il consiste en une bibliothèque de film où l'on peut ajouter/supprimer/modifier des films ainsi qu'associer ou dissocier des acteurs de ses film. 
 
 ## Structure
 
     tp/
-      back/     projet Gradle + Spring Boot préconfiguré : TP Java / Spring
-      front/    répertoire vide, destiné au projet créé par « ng new » : TP Angular
+      back/   
+      front/    
     td/
       back/     TD : API REST de la bibliothèque de films
         http/   requêtes HTTP, exécutées avec l'extension VSCode REST Client
       front/    TD : front Angular de la bibliothèque de films
 
-L'ouverture du dossier racine dans VSCode déclenche la proposition des extensions
-recommandées.
+## Prérequis
 
-## Récupération du dépôt
+Il est necessaire d'avoir :
 
-```bash
-git clone polytech-fullstack-starter.bundle mon-depot
-cd mon-depot
-git remote remove origin                 # le bundle ne constitue pas un dépôt distant
-git remote add origin <URL du dépôt GitHub>
-git push -u origin main
-```
+• JDK 26  
+• Gradle 9
+• PostgreSQL avec cette config :
+    url: jdbc:postgresql://localhost:5432/filmdb
+    username: backuser2
+    password: password
+• REST Client
 
 ## Démarrage
 
-### Back des TP
+Pour lancer le projet : 
 
-```bash
-cd tp/back
-./gradlew build      # Windows : gradlew.bat build
-./gradlew bootRun
-```
+Etape 1 : Démarrer le backend (port 8080)
+Depuis la racine du projet : 
 
-Le wrapper télécharge Gradle 9.7.1 et, le cas échéant, le JDK 26 : aucune installation
-manuelle n'est nécessaire. Le fichier `build.gradle` ne déclare qu'une dépendance,
-`spring-boot-starter-webmvc`. Elle apporte Spring MVC, Jackson, un Tomcat embarqué ainsi
-que `spring-context`, le conteneur IoC utilisé dans les premiers TP.
+  cd td/back
+  ./gradlew bootRun
 
-### Front des TP
+Etape 2. Démarrer le front (port 4200) 
+Depuis la racine du projet : 
 
-```bash
-cd tp/front
-ng new tp-front      # CSS, sans SSR, « None » pour les outils IA
-```
+  cd td/front/films-app
+  ng serve
 
-### TD
+Vous pouvez ensuite ouvrir le site sur un navigateur via : http://localhost:4200/films
+Les appels api sont envoyés au back via proxy.conf.json
 
-Le back est généré depuis [start.spring.io](https://start.spring.io) ou depuis l'IDE,
-**dans `td/back`**, avec la dépendance Spring Web. Le front est généré avec `ng new`,
-**dans `td/front`**.
+## Fonctionnalités et Endpoints :
 
-## Requêtes HTTP
+### Ressource : Films (/api/films)
 
-Ni collection Postman ni collection Bruno : les requêtes sont versionnées dans des fichiers
-`.http` placés dans `td/back/http` et exécutées par l'extension VSCode
-[REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client),
-via l'action *Send Request* affichée au-dessus de chaque requête. Un fichier par ressource,
-requêtes séparées par `###`. `films.http` contient le squelette du TD 1.
+| Méthode | Endpoint | Description | Code de réponse |
+| :--- | :--- | :--- | :--- |
+| **GET** | `/api/films` | Liste de tous les films enregistrés dans la db | `200 OK` |
+| **GET** | `/api/films/{id}` | Les détails d'un film avec son ID et ses acteurs associés | `200 OK` / `404 Not Found` |
+| **POST** | `/api/films` | Crée un nouveau film dans la db | `201 Created` |
+| **PUT** | `/api/films/{id}` | Met à jour les informations d'un film déjà existant | `200 OK` / `404 Not Found` |
+| **DELETE** | `/api/films/{id}` | Supprime un film avec son ID | `204 No Content` |
 
-## Rendus
+---
 
-| Tag   | Contenu                                        |
-|-------|------------------------------------------------|
-| `td1` | API REST, stockage en mémoire                  |
-| `td2` | persistance JPA, DTO, CORS                     |
-| `td3` | front Angular branché sur l'API                |
+### Ressource : Acteurs (/api/acteurs)
 
-La régularité et la lisibilité des commits ainsi que la mise à jour du `README.md` sont
-prises en compte dans l'évaluation.
+| Méthode | Endpoint | Description | Code de réponse |
+| :--- | :--- | :--- | :--- |
+| **GET** | `/api/acteurs` | Récupère la liste de tous les acteurs | `200 OK` |
+| **GET** | `/api/acteurs/{id}` | Récupère les détails d'un acteur spécifique | `200 OK` / `404 Not Found` |
+| **POST** | `/api/acteurs` | Crée un nouvel acteur | `201 Created` |
+| **PUT** | `/api/acteurs/{id}` | Met à jour les informations d'un acteur déjà existant | `200 OK` / `404 Not Found` |
+| **DELETE** | `/api/acteurs/{id}` | Supprime un acteur avec son ID | `204 No Content` |
+| **GET** | `/api/acteurs/{id}/films` | Récupère la liste des films auxquels un acteur spécifique a participé | `200 OK` / `404 Not Found` |
+
+---
+
+### Relations : Association Film / Acteur
+
+| Méthode | Endpoint | Description | Code de réponse |
+| :--- | :--- | :--- | :--- |
+| **POST** | `/api/films/{id}/acteurs/{acteurId}` | Associe un acteur existant à un film | `200 OK` / `204 No Content` |
+| **DELETE** | `/api/films/{id}/acteurs/{acteurId}` | Dissocie un acteur d'un film | `204 No Content` |
+
+Ces endpoints sont donc tous utilisés en tant que fonctionnalités sur le site.
