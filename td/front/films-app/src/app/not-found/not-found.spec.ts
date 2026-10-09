@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FilmForm } from './film-form';
+import { NotFound } from './not-found';
 
-describe('FilmForm', () => {
-  let component: FilmForm;
-  let fixture: ComponentFixture<FilmForm>;
+describe('NotFound', () => {
+  let component: NotFound;
+  let fixture: ComponentFixture<NotFound>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilmForm],
+      imports: [NotFound],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FilmForm);
+    fixture = TestBed.createComponent(NotFound);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
@@ -18,5 +18,4 @@ describe('FilmForm', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
 });

@@ -1,0 +1,16 @@
+@if (message()) {
+  <p>{{ message() }}</p>
+}
+
+<form #f="ngForm" (ngSubmit)="enregistrer()">
+  <label for="nom">nom :</label>
+  <input name="nom" [(ngModel)]="acteur.nom" required minlength="2" #nom="ngModel" />
+  
+  @if (nom.invalid && nom.touched) {
+    <small>Nom requis</small>
+  }
+  <label for="prenom">prenom :</label>
+  <input name="prenom" [(ngModel)]="acteur.prenom" required />
+  
+  <button type="submit" [disabled]="f.invalid">Enregistrer</button>
+</form>

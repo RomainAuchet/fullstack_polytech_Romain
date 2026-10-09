@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FilmForm } from './film-form';
+import { ActeurForm } from './acteur-form';
 
-describe('FilmForm', () => {
-  let component: FilmForm;
-  let fixture: ComponentFixture<FilmForm>;
+describe('ActeurForm', () => {
+  let component: ActeurForm;
+  let fixture: ComponentFixture<ActeurForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilmForm],
+      imports: [ActeurForm],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FilmForm);
+    fixture = TestBed.createComponent(ActeurForm);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
@@ -18,5 +18,4 @@ describe('FilmForm', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
 });

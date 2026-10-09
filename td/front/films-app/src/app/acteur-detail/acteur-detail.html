@@ -1,1 +1,19 @@
-<p>acteur-detail works!</p>
+@if (erreur()) {
+  <p>{{ erreur() }}</p>
+}
+
+
+@if (acteur(); as a) {
+  <h2>{{ a.nom }} {{ a.prenom }}</h2>
+  
+  <h3>Films dans lesquels il/elle a joué : </h3>
+  <ul>
+    @for (f of films(); track f.id) {
+      <li>
+        <a [routerLink]="['/films', f.id]">{{ f.titre }}</a>
+      </li>
+    } @empty {
+      <p>Il/elle n'a encore participé à aucun film.</p>
+    }
+  </ul>
+}

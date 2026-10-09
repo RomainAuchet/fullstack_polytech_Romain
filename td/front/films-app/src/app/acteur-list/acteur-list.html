@@ -1,1 +1,10 @@
-<p>acteur-list works!</p>
+<h2>Liste des Acteurs</h2>
+<ul>
+  @for (a of acteurs(); track a.id) {
+    <li>
+      <a [routerLink]="['/acteurs', a.id]">{{ a.nom }} {{ a.prenom }}</a>
+    </li>
+  } @empty {
+    <p>Aucun acteur enregistré.</p>
+  }
+</ul>
