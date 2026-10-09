@@ -21,11 +21,11 @@ Il est necessaire d'avoir :
 • JDK 26  
 • Gradle 9
 • PostgreSQL avec cette config :
-    ```yaml
+    ```ini
     url: jdbc:postgresql://localhost:5432/filmdb
     username: backuser2
     password: password
-    ```
+    ``
 
 • REST Client
 
@@ -41,7 +41,7 @@ Depuis la racine du projet :
   ./gradlew bootRun
 ```
 
-Etape 2. Démarrer le front (port 4200) 
+Etape 2 : Démarrer le front (port 4200) 
 Depuis la racine du projet : 
 
  ```bash
@@ -51,6 +51,10 @@ Depuis la racine du projet :
 
 Vous pouvez ensuite ouvrir le site sur un navigateur via : http://localhost:4200/films
 Les appels api sont envoyés au back via `proxy.conf.json`.
+
+Etape 3 : Ajouter des Films et Acteurs
+
+Par défaut la DB sera vide, il faudra donc ajouter manuellement des films et acteurs avant de tester les liaisons et autre. 
 
 ## Fonctionnalités et Endpoints :
 
